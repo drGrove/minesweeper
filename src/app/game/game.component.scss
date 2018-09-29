@@ -1,0 +1,36 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+
+  &>.header {
+    background: red;
+    display: grid;
+    grid-area: header;
+    grid-row: 1;
+    grid-template-columns: 50px auto 50px;
+    text-align: center;
+
+    .mines, .start, .timer {
+      padding: 20px;
+    }
+
+    &>.mines {
+      grid-column: 1;
+      text-align: left;
+    }
+    &>.start {
+      grid-column: 2;
+    }
+    &>.timer {
+      grid-column: 3;
+      text-align: right;
+    }
+  }
+
+  app-board {
+    background: blue;
+    grid-area: board;
+    text-align: center;
+  }
+}

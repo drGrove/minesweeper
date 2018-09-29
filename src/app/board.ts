@@ -1,36 +1,29 @@
 import { Piece } from './piece';
-
-export class Size {
-  public rows = 0;
-  public cols = 0;
-
-  constructor(rows: number, cols: number) {
-    this.rows = rows;
-    this.cols = cols;
-  }
-}
+import { Size } from './size';
 
 export class Board {
   public board: Piece[][];
   public mines = 0;
   public flags = 0;
   public size: Size;
+  private allowMarks: boolean;
 
-  constructor(size: Size, numMines: number) {
+  constructor(size: Size, numMines: number, marks: boolean) {
     let board: Piece[][] = [];
+    let mines: Set<string>;
     this.mines = numMines;
     this.size = size;
+    this.allowMarks = marks;
     const minesPlaced = 0;
     for (let row = 0; row < this.size.rows; row++) {
       board[row] = [];
       for (let col = 0; col < this.size.cols; col++) {
-        board[row][col] = new Piece();
+        board[row][col] = new Piece(this.allowMarks);
       }
     }
     board = Object.seal(board);
-    const bm = this.setMines(board, numMines);
-    board = bm.board;
-    board = this.setValuesAroundMines(board, bm.mines, this.size);
+    ({ board, mines} = this.setMines(board, numMines));
+    board = this.setValuesAroundMines(board, mines, this.size);
     this.board = board;
   }
 
