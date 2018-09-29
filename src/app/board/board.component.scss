@@ -1,0 +1,14 @@
+:host {
+  --colNum: 30;
+  --rowNum: 16;
+  --gridHeight: 20px;
+
+  display: grid;
+  grid-template-columns: repeat(var(--colNum), auto);
+  grid-template-rows: repeat(var(--rowNum), var(--gridHeight));
+
+  .row {
+    display: grid-inline;
+    grid-gap: 20px 0;
+  }
+}

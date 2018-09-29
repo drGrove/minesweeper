@@ -25,7 +25,7 @@ class Options {
 })
 export class GameComponent implements OnInit {
   private options: Options = new Options();
-  private game: Game;
+  public game: Game;
 
   constructor() {
     this.newGame();
@@ -35,5 +35,6 @@ export class GameComponent implements OnInit {
 
   newGame(options: Options = new Options()) {
     this.game = new Game(options.size, options.mines, options.marks);
+    console.log(this.game);
   }
 }

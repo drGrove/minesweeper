@@ -66,7 +66,6 @@ export class Board {
       ]);
       for (const shift of shifts) {
         const shiftPos: number[] = sumArr(pos, shift);
-        console.log('Shift Pos: ', shiftPos);
         if ((shiftPos[0] < 0) || (shiftPos[0] >= size.rows) ||
             (shiftPos[1] < 0) || (shiftPos[1] >= size.cols)
         ) {
