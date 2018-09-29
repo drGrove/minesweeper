@@ -17,5 +17,3 @@ export class Game {
     this.interval = setInterval(this.time++, 1000);
   }
 }
-
-const game = new Game(new Size(10, 10), 10);

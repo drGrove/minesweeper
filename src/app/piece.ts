@@ -22,8 +22,10 @@ export class Piece {
     return this.value;
   }
 
-  public addToValue(value: number) {
-    this.value += value;
+  public addToValue() {
+    if (this.value !== -1) {
+      this.value++;
+    }
   }
 
   public setMine() {
