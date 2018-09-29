@@ -1,13 +1,16 @@
-import { Component, OnInit, OnChanges, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, Output, EventEmitter } from '@angular/core';
 import { Board } from '../board';
+import { Piece } from '../piece';
 
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
 })
-export class BoardComponent implements OnInit, OnChanges {
+export class BoardComponent implements OnInit {
   @Input() board: Board;
+  @Output() end: EventEmitter<boolean> = new EventEmitter<boolean>();
+  public ended: boolean;
 
   constructor(private elementRef: ElementRef) { }
 
@@ -15,11 +18,12 @@ export class BoardComponent implements OnInit, OnChanges {
     console.log(this.board);
   }
 
-  ngOnChanges() {
-    const htmlStyles = window.getComputedStyle(document.querySelector('app-board'));
-    const rowNum = parseInt(htmlStyles.getPropertyValue('--rowNum'), 10);
-    const colNum = parseInt(htmlStyles.getPropertyValue('--colNum'), 10);
-    this.elementRef.nativeElement.style.setProperty('--rowNum', this.board.size.rows);
-    this.elementRef.nativeElement.style.setProperty('--colNum', this.board.size.cols);
+  setEnd(event: boolean) {
+    this.ended = event;
+    this.end.emit(event);
+  }
+
+  showAround(event: Piece) {
+    console.log('Show some stuff');
   }
 }

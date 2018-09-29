@@ -2,8 +2,9 @@ export class Piece {
   private isRevealed = false;
   private value = 0;
   private allowMarks: boolean;
-  private marked: boolean;
+  private isMarked: boolean;
   public isFlagged = false;
+  public hitMine = false;
 
   constructor(allowMarks: boolean) {
     this.allowMarks = allowMarks;
@@ -17,25 +18,25 @@ export class Piece {
     this.isRevealed = reveal;
   }
 
-  public set isMarked(marked: boolean) {
+  public set marked(marked: boolean) {
     if (this.allowMarks) {
-      this.marked = marked;
+      this.isMarked = marked;
     }
   }
 
-  public get isMarked(): boolean {
-    return this.marked;
+  public get marked(): boolean {
+    return this.isMarked;
   }
 
   public get revealed() {
     return this.isRevealed;
   }
 
-  public getValue(): number {
+  public getValue(): number | string {
     if (this.revealed) {
       return this.value;
     }
-    throw new Error('Cannot get value for item not revealed');
+    return '';
   }
 
   public addToValue() {

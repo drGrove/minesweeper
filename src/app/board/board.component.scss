@@ -1,14 +1,22 @@
 :host {
-  --colNum: 30;
-  --rowNum: 16;
-  --gridHeight: 20px;
+  table {
+    display: table;
+    background: silver;
 
-  display: grid;
-  grid-template-columns: repeat(var(--colNum), auto);
-  grid-template-rows: repeat(var(--rowNum), var(--gridHeight));
+    td, app-piece {
+      border-color: white;
+      height: 25px;
+      min-height: 25px;
+      min-width: 25px;
+      width: 25px;
+    }
 
-  .row {
-    display: grid-inline;
-    grid-gap: 20px 0;
+    .blank {
+      border-style: inset;
+    }
+    .open {
+      border-style: outset;
+      border-bottom: white 1px solid;
+    }
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StateService } from './state.service';
 import { Game } from '../game';
 import { Size } from '../size';
 
@@ -27,7 +28,7 @@ export class GameComponent implements OnInit {
   private options: Options = new Options();
   public game: Game;
 
-  constructor() {
+  constructor(private _state: StateService) {
     this.newGame();
   }
 
@@ -35,6 +36,11 @@ export class GameComponent implements OnInit {
 
   newGame(options: Options = new Options()) {
     this.game = new Game(options.size, options.mines, options.marks);
-    console.log(this.game);
+    this._state.setGame(this.game);
+  }
+
+  setEnded(event: Event) {
+    console.log('Event', event);
+    this.game.ended = true;
   }
 }

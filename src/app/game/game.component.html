@@ -3,4 +3,9 @@
   <div class="start" (click)="this.newGame(this.options)">New</div>
   <div class="timer" [innerHTML]="this.game.time"></div>
 </div>
-<app-board [board]="this.game.board"></app-board>
+<app-board
+  [board]="this.game.board"
+  (end)="setEnded($event)"
+  [class.disabled]="this.game.ended"
+>
+</app-board>

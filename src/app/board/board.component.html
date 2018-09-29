@@ -1,10 +1,21 @@
-<div
-  class="row"
-  *ngFor="let row of board.board"
->
-  <app-piece
-    *ngFor="let piece of row"
-    [piece]="piece"
-  >
-  </app-piece>
-</div>
+<table>
+  <tbody>
+    <tr
+      *ngFor="let row of board.board; index as rowNum"
+    >
+      <td
+        *ngFor="let piece of row; index as colNum"
+        [class.blank]="!piece.revealed && !piece.flagged && !piece.marked"
+        [style.background-color]="piece.hitMine ? 'red': ''"
+              >
+        <app-piece
+          [piece]="piece"
+          (end)="setEnd($event)"
+          [ended]="ended"
+          (showAround)="showAround($event)"
+        >
+        </app-piece>
+      </td>
+    </tr>
+  </tbody>
+</table>
