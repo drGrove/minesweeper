@@ -27,7 +27,7 @@ export class LightboxComponent implements OnInit {
 
   ngOnInit() {
     this.gameForm = this.fb.group({
-      selectedOption: 'Beginner',
+      selectedOption: 'Expert',
       setMark: false,
       rows: 20,
       cols: 30,
