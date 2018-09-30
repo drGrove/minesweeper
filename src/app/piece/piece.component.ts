@@ -19,15 +19,17 @@ export class PieceComponent implements OnInit {
   ngOnInit() {
   }
 
-  @HostListener('mousedown')
-  onMouseDown() {
+  @HostListener('mousedown', ['$event'])
+  onMouseDown(event) {
     this._state.thinking = true;
     this.piece.thinking = true;
+    this._state.rightClickDepressed = event.which === 3;
     this._state.lastListenedPiece = this.piece;
   }
 
   @HostListener('mouseup', ['$event'])
   onMouseUp(event) {
+    this._state.rightClickDepressed = false;
     this._state.thinking = false;
     this.piece.thinking = false;
     switch (event.which) {

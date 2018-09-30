@@ -11,6 +11,7 @@ export class StateService {
   public game: Game;
   public thinking = false;
   public lastListenedPiece: Piece | null;
+  public rightClickDepressed: boolean;
   private board: Board;
   private mines: number;
   private flags: number;
