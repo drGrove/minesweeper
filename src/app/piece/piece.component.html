@@ -1,8 +1,6 @@
 <p>
-  <span *ngIf="piece.getValue() > 0 && piece.revealed">{{ piece.getValue() }}</span>
-  <span
-    *ngIf="piece.getValue() == -1 && !piece.isFlagged && !piece.isMarked && piece.revealed"
-  >
-    M
-  </span>
+  <span *ngIf="show('value')">{{ piece.getValue() }}</span>
+  <span *ngIf="show('mine')">M</span>
+  <span *ngIf="show('flag')">F</span>
+  <span *ngIf="show('mark')">?</span>
 </p>

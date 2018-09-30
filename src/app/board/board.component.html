@@ -5,14 +5,13 @@
     >
       <td
         *ngFor="let piece of row; index as colNum"
-        [class.blank]="!piece.revealed && !piece.flagged && !piece.marked"
+        [class.blank]="!piece.revealed"
         [style.background-color]="piece.hitMine ? 'red': ''"
-              >
+      >
         <app-piece
           [piece]="piece"
-          (end)="setEnd($event)"
-          [ended]="ended"
-          (showAround)="showAround($event)"
+          [positionX]="rowNum"
+          [positionY]="colNum"
         >
         </app-piece>
       </td>

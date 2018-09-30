@@ -3,7 +3,7 @@ export class Piece {
   private value = 0;
   private allowMarks: boolean;
   private isMarked: boolean;
-  public isFlagged = false;
+  private isFlagged = false;
   public hitMine = false;
 
   constructor(allowMarks: boolean) {
@@ -12,6 +12,15 @@ export class Piece {
 
   public isMine(): boolean {
     return this.value < 0;
+  }
+
+  public set flagged(flagged: boolean) {
+    this.isFlagged = flagged;
+    this.marked = false;
+  }
+
+  public get flagged(): boolean {
+    return this.isFlagged;
   }
 
   public set revealed(reveal: boolean) {
@@ -32,11 +41,11 @@ export class Piece {
     return this.isRevealed;
   }
 
-  public getValue(): number | string {
+  public getValue(): number {
     if (this.revealed) {
       return this.value;
     }
-    return '';
+    return;
   }
 
   public addToValue() {

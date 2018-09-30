@@ -19,4 +19,8 @@
       border-bottom: white 1px solid;
     }
   }
+
+  &.disabled {
+    pointer-events: none;
+  }
 }

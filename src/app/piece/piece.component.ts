@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, HostListener, Output, EventEmitter } from '@angular/core';
+import { StateService } from '../state.service';
 import { Piece } from '../piece';
 
 @Component({
@@ -8,8 +9,10 @@ import { Piece } from '../piece';
 })
 export class PieceComponent implements OnInit {
   @Input() piece: Piece;
+  @Input() positionX: number;
+  @Input() positionY: number;
 
-  constructor() { }
+  constructor(private _state: StateService) { }
 
   ngOnInit() {
   }
@@ -26,36 +29,62 @@ export class PieceComponent implements OnInit {
         this.toggleFlaggingMarking();
         break;
       default:
-        console.log('IDK', event.which);
+        // Do nothing
     }
   }
 
   private showValue() {
-    this.piece.isFlagged = false;
-    this.piece.marked = false;
+    this._state.setStarted();
+    if (this.piece.flagged || this.piece.marked) {
+      return;
+    }
     this.piece.revealed = true;
     switch (this.piece.getValue()) {
       case -1:
         this.piece.hitMine = true;
-        this.end.emit(true);
+        this._state.setEnded();
         break;
       case 0:
-        this.showAround.emit(this.piece);
+        this._state.showAround(this.piece, [this.positionX, this.positionY]);
         break;
       default:
         // Do nothing just show
     }
   }
 
-  show() {
-    const value = this.piece.getValue();
-    switch (value) {
-      case -1:
-
+  show(valueType: string) {
+    switch (valueType) {
+      case 'value':
+        if (!this.piece.revealed) { return false; }
+        return this.piece.getValue() > 0;
+      case 'mine':
+        return this.piece.getValue() === -1 && !this.piece.marked && !this.piece.flagged;
+      case 'flag':
+        return this.piece.flagged && !this.piece.revealed;
+      case 'mark':
+        return this.piece.marked && !this.piece.revealed;
+      default:
+        return false;
     }
   }
 
   private toggleFlaggingMarking () {
+    if (!this.piece.flagged && !this.piece.marked) {
+      this.piece.flagged = true;
+      this._state.addToFlags(1);
+      return;
+    }
 
+    if (this.piece.flagged) {
+      this.piece.flagged = false;
+      this._state.addToFlags(-1);
+      this.piece.marked = true;
+      return;
+    }
+
+    if (this.piece.marked) {
+      this.piece.marked = false;
+      return;
+    }
   }
 }

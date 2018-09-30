@@ -4,7 +4,6 @@ import { Size } from './size';
 export class Board {
   public board: Piece[][];
   public mines = 0;
-  public flags = 0;
   public size: Size;
   private allowMarks: boolean;
 
