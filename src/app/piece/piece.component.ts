@@ -12,13 +12,22 @@ export class PieceComponent implements OnInit {
   @Input() positionX: number;
   @Input() positionY: number;
 
-  constructor(private _state: StateService) { }
+  constructor(
+    private _state: StateService,
+  ) { }
 
   ngOnInit() {
   }
 
-  @HostListener('mousedown', ['$event'])
-  onMouseDown(event) {
+  @HostListener('mousedown')
+  onMouseDown() {
+    this._state.thinking = true;
+  }
+
+
+  @HostListener('mouseup', ['$event'])
+  onMouseUp(event) {
+    this._state.thinking = false;
     switch (event.which) {
       case 1: // Left Click
         this.showValue();

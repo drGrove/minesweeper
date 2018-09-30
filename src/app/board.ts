@@ -1,6 +1,17 @@
 import { Piece } from './piece';
 import { Size } from './size';
 
+export const SHIFTS: number[][] = Object.seal([
+  [-1, -1],
+  [-1, 0],
+  [-1, 1],
+  [0, -1],
+  [0, 1],
+  [1, -1],
+  [1, 0],
+  [1, 1]
+]);
+
 export class Board {
   public board: Piece[][];
   public mines = 0;
@@ -53,17 +64,7 @@ export class Board {
     do {
       const pos: number[] = convertToNumberArray(position.value.split('_'));
       const mine: Piece = board[pos[0]][pos[1]];
-      const shifts: number[][] = Object.seal([
-        [-1, -1],
-        [-1, 0],
-        [-1, 1],
-        [0, -1],
-        [0, 1],
-        [1, -1],
-        [1, 0],
-        [1, 1]
-      ]);
-      for (const shift of shifts) {
+      for (const shift of SHIFTS) {
         const shiftPos: number[] = sumArr(pos, shift);
         if ((shiftPos[0] < 0) || (shiftPos[0] >= size.rows) ||
             (shiftPos[1] < 0) || (shiftPos[1] >= size.cols)
@@ -81,7 +82,7 @@ export class Board {
   }
 }
 
-function convertToNumberArray(arr: string[]): number[] {
+export function convertToNumberArray(arr: string[]): number[] {
   const numArr: number[] = [];
   for (let i = arr.length; i--;) {
     numArr[i] = +arr[i]; // Shortcut to convert to int
@@ -89,7 +90,7 @@ function convertToNumberArray(arr: string[]): number[] {
   return Object.seal(numArr);
 }
 
-function sumArr(arr1: number[], arr2: number[]): number[] {
+export function sumArr(arr1: number[], arr2: number[]): number[] {
   return arr1.map( (num, idx) => {
     return num + arr2[idx];
   });
@@ -115,3 +116,4 @@ function genPositions(
   }
   return positions;
 }
+

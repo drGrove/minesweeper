@@ -1,7 +1,10 @@
 :host {
   display: flex;
   flex-direction: column;
-  width: 600px;
+
+  .header, app-board {
+    width: 100%;
+  }
 
   &>.header {
     background: red;
@@ -20,6 +23,7 @@
       text-align: left;
     }
     &>.start {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
       grid-column: 2;
     }
     &>.timer {

@@ -7,6 +7,8 @@ export class Game {
   public board: Board;
   public size: Size;
   public mines: number;
+  public win: boolean;
+  public thinking: boolean;
   private isEnded = false;
   private isStarted = false;
 
@@ -34,9 +36,9 @@ export class Game {
   set started(start: boolean) {
     if (!this.isStarted) {
       this.isStarted = start;
+      this.time = 1;
       this.interval = setInterval(() => {
         this.time++;
-        console.log('Yup');
       }, 1000);
     }
   }

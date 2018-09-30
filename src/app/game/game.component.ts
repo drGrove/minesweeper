@@ -38,4 +38,22 @@ export class GameComponent implements OnInit {
     this.game = new Game(options.size, options.mines, options.marks);
     this._state.setGame(this.game);
   }
+
+  showFace() {
+    if (this._state.thinking) {
+      return '🤔';
+    }
+    if (!this.game.started) {
+      return '🙂';
+    }
+    if (this.game.started && !this.game.ended && !this.game.thinking) {
+      return '🙂';
+    }
+    if (this.game.ended && !this.game.win) {
+      return '😭';
+    }
+    if (this.game.ended && this.game.win) {
+      return'😎';
+    }
+  }
 }

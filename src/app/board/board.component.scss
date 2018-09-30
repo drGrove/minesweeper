@@ -1,22 +1,41 @@
 :host {
   table {
     display: table;
+    border-collapse: collapse;
     background: silver;
 
-    td, app-piece {
+    td {
       border-color: white;
       height: 25px;
       min-height: 25px;
       min-width: 25px;
+      max-height: 25px;
+      max-width: 25px;
       width: 25px;
+      $colorMap: (
+        1: blue,
+        2: green,
+        3: red,
+        4: purple,
+        5: magenta,
+        6: cyan,
+        7: black,
+        8: darkgrey
+      );
+
+      @each $num, $color in $colorMap {
+        &.num--#{$num} {
+          color: $color;
+        }
+      }
     }
 
     .blank {
-      border-style: inset;
+      border-style: outset;
     }
     .open {
-      border-style: outset;
-      border-bottom: white 1px solid;
+      border-style: inset;
+      border: grey 1px solid;
     }
   }
 

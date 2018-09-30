@@ -6,6 +6,15 @@
       <td
         *ngFor="let piece of row; index as colNum"
         [class.blank]="!piece.revealed"
+        [class.open]="piece.revealed"
+        [class.num--1]="piece.revealed && piece.getValue() == 1"
+        [class.num--2]="piece.revealed && piece.getValue() == 2"
+        [class.num--3]="piece.revealed && piece.getValue() == 3"
+        [class.num--4]="piece.revealed && piece.getValue() == 4"
+        [class.num--5]="piece.revealed && piece.getValue() == 5"
+        [class.num--6]="piece.revealed && piece.getValue() == 6"
+        [class.num--7]="piece.revealed && piece.getValue() == 7"
+        [class.num--8]="piece.revealed && piece.getValue() == 8"
         [style.background-color]="piece.hitMine ? 'red': ''"
       >
         <app-piece

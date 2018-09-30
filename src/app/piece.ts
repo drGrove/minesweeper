@@ -23,6 +23,10 @@ export class Piece {
     return this.isFlagged;
   }
 
+  public get isBlank(): boolean {
+    return this.value === 0;
+  }
+
   public set revealed(reveal: boolean) {
     this.isRevealed = reveal;
   }
