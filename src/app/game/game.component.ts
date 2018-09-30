@@ -46,7 +46,7 @@ export class GameComponent implements OnInit {
     if (!this.game.started) {
       return '🙂';
     }
-    if (this.game.started && !this.game.ended && !this.game.thinking) {
+    if (this.game.started && !this.game.ended) {
       return '🙂';
     }
     if (this.game.ended && !this.game.win) {
