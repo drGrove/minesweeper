@@ -1,8 +1,10 @@
 :host {
-  display: flex;
-  flex: 0;
-  flex-direction: column;
   --board-width: 903px;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  flex: 0;
+  width: var(--board-width);
 
   .header, app-board, options {
     width: var(--board-width);
