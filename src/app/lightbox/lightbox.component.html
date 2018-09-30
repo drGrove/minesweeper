@@ -1,0 +1,85 @@
+<div class="wrapper">
+  <div class="header">
+    <div>{{ this.state }}</div>
+    <div class="close" (click)="this.close()">X</div>
+  </div>
+  <div *ngIf="this.state === 'Game'">
+    <form [formGroup]="gameForm">
+      <table class="game">
+        <thead>
+          <tr>
+            <td></td>
+            <td>Height</td>
+            <td>Width</td>
+            <td>Mines</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let option of this.options">
+            <td>
+              <input
+                formControlName="selectedOption"
+                name="selectedOption"
+                type="radio"
+                [value]="option[0]"
+              /> {{ option[0] }}
+            </td>
+            <td>{{ option[1].size.rows }}</td>
+            <td>{{ option[1].size.cols }}</td>
+            <td>{{ option[1].mines }}</td>
+          </tr>
+          <tr>
+            <td>
+              <input
+                name="selectedOption"
+                type="radio"
+                formControlName="selectedOption"
+                value="Custom"
+              /> Custom
+            </td>
+            <td >
+              <input
+                name="size_rows"
+                type="text"
+                formControlName="rows"
+              />
+            </td>
+            <td>
+              <input
+                name="size_cols"
+                type="text"
+                formControlName="cols"
+              />
+            </td>
+            <td>
+              <input
+                name="mines"
+                type="text"
+                formControlName="mines"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="footer">
+        <button (click)="newGame()">New Game</button>
+        <div>
+          <input type="checkbox" name="setMark" formControlName="setMark" /> Marks (?)
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="controls" *ngIf="this.state === 'Controls'">
+    <ul>
+      <li>
+        <b>Left-click</b> an empty squard to reveal it.
+      </li>
+      <li>
+        <b>Right-click</b> an empty square to flag it.
+      </li>
+      <li>
+        <b>Middle-click</b> a number to reveal its adjacent squares.
+      </li>
+    </ul>
+  </div>
+</div>

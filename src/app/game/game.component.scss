@@ -1,21 +1,36 @@
 :host {
   display: flex;
+  flex: 0;
   flex-direction: column;
+  --board-width: 903px;
 
-  .header, app-board {
-    width: 100%;
+  .header, app-board, options {
+    width: var(--board-width);
+  }
+
+  .link {
+    cursor: pointer;
+    color: white;
+    padding: 0 0 0 5px;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:not(:last-child):after {
+      content: '|'
+    }
   }
 
   &>.header {
-    background: red;
-    display: grid;
-    grid-area: header;
-    grid-row: 1;
-    grid-template-columns: 50px auto 50px;
+    background: lightgrey;
     text-align: center;
+    display: flex;
+    justify-content: space-between;
 
     .mines, .start, .timer {
       padding: 20px;
+      max-width: 60px;
     }
 
     &>.mines {

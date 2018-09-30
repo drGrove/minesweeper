@@ -1,0 +1,58 @@
+:host {
+  background: grey;
+  display: none;
+  height: auto;
+  left: 50px;
+  min-height: 50px;
+  min-width: 250px;
+  position: absolute;
+  top: 50px;
+  width: auto;
+
+  &[ng-reflect-show="true"] {
+    display: block;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header {
+    background: blue;
+    padding: 10px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .controls {
+    font-size: 9pt;
+  }
+
+  .game {
+    font-size: 9pt;
+    width: 100%;
+    thead {
+
+    }
+    tbody {
+      background-color: lightgrey;
+
+      td:not(:first-child) {
+        text-align: center;
+      }
+    }
+    [type="text"] {
+      width: 30px;
+    }
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+  }
+}

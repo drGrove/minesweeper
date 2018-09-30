@@ -1,3 +1,7 @@
+<div class="options">
+  <a class="link" (click)="showMenu('Game')">Game</a>
+  <a class="link" (click)="showMenu('Controls')">Controls</a>
+</div>
 <div class="header">
   <div class="mines" [innerHTML]="this._state.mineCounter"></div>
   <div
@@ -11,5 +15,11 @@
 <app-board
   [board]="this.game.board"
   [class.disabled]="this._state.isEnded()"
+  oncontextmenu="return false;"
 >
 </app-board>
+<app-lightbox
+  [(show)]="showLightbox"
+  [state]="lightboxState"
+  (startNewGame)="newGame($event)"
+></app-lightbox>

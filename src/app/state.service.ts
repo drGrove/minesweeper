@@ -21,13 +21,12 @@ export class StateService {
   }
 
   setGame(game: Game) {
-    this.game = game;
     this.board = game.board;
-    this.mines = this.game.mines;
-    this.game.ended = false;
+    this.mines = game.mines;
     this.revealedPieces = 0;
     this.flags = 0;
-    this.nonMinePieces = (this.game.size.rows * this.game.size.cols) - this.mines;
+    this.nonMinePieces = (game.size.rows * game.size.cols) - this.mines;
+    this.game = game;
   }
 
   get mineCounter(): number {
@@ -79,7 +78,8 @@ export class StateService {
       if (p.isBlank) {
         this.showAround(p, shiftPos, seen);
       }
-      if (!p.flagged) {
+      if (!p.flagged && !p.isMine() && !p.revealed) {
+        console.log(p);
         p.revealed = true;
         this.incRevealed();
       }
