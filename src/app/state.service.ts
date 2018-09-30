@@ -3,6 +3,7 @@ import { Game } from './game';
 import { SHIFTS, Board, sumArr } from './board';
 import { Size } from './size';
 import { Piece } from './piece';
+import { eqSet } from './utils';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +60,47 @@ export class StateService {
 
   started() {
     return this.game.started;
+  }
+
+  showIfAllFlaggedFound(
+    piece: Piece,
+    pos: number[],
+    minesSeen = new Set<Piece>(),
+    minesFlagged = new Set<Piece>(),
+    piecesToReveal = new Set<Array<(Piece|number[])>> ()
+  ) {
+    const board: Piece[][] = this.board.board;
+    for (const shift of SHIFTS) {
+      const shiftPos: number[] = sumArr(pos, shift);
+      if ((shiftPos[0] < 0) || (shiftPos[0] >= this.board.size.rows) ||
+          (shiftPos[1] < 0) || (shiftPos[1] >= this.board.size.cols)
+      ) {
+        continue;
+      }
+      const p: Piece = board[shiftPos[0]][shiftPos[1]];
+      if (p.revealed) { continue; }
+      if (p.isBlank) {
+        this.showAround(p, shiftPos);
+      }
+      if (p.isMine()) {
+        minesSeen.add(p);
+        if (p.flagged) {
+          minesFlagged.add(p);
+        }
+        continue;
+      }
+      if (!p.flagged && !p.isMine() && !p.revealed) {
+        piecesToReveal.add([piece, [shiftPos[0], shiftPos[1]]]);
+      }
+    }
+
+    if (eqSet(minesSeen, minesFlagged)) {
+      for (const [rp, rp_pos] of  piecesToReveal) {
+        (<Piece>rp).revealed = true;
+        this.incRevealed();
+        board[(<number>rp_pos[0])][(<number>rp_pos[1])] = (<Piece>rp);
+      }
+    }
   }
 
   showAround(piece: Piece, pos: number[], seen = new Set<string>()) {

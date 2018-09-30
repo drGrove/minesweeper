@@ -37,6 +37,8 @@ export class PieceComponent implements OnInit {
         this.showValue();
         break;
       case 2: // Middle Click
+        if (!this.piece.revealed) { return false; }
+        this._state.showIfAllFlaggedFound(this.piece, [this.positionX, this.positionY]);
         break;
       case 3: // Right Click
         this.toggleFlaggingMarking();
