@@ -69,7 +69,7 @@ export class PieceComponent implements OnInit {
         if (!this.piece.revealed) { return false; }
         return this.piece.getValue() > 0;
       case 'mine':
-        if (this._state.isEnded() && this.piece.isMine()) { return true; }
+        if (this._state.isEnded() && this.piece.isMine() && !this.piece.flagged) { return true; }
         return this.piece.getValue() === -1 && !this.piece.marked && !this.piece.flagged;
       case 'wrongFlag':
         return this._state.isEnded() && !this.piece.isMine() && this.piece.flagged && !this.piece.revealed;

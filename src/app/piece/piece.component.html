@@ -1,6 +1,7 @@
 <span *ngIf="show('value')">{{ piece.getValue() }}</span>
 <span *ngIf="show('mine')">💣</span>
-<span *ngIf="show('flag')">🏴</span>
+<span *ngIf="show('flag') && !show('wrongFlag')">🏴</span>
+<span *ngIf="show('wrongFlag')">🚩</span>
 <span *ngIf="show('mark')">❓</span>
 <span
   *ngIf="!show('value') && !show('mine') && !show('flag') && !show('mark')"
