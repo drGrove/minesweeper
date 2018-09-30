@@ -79,7 +79,6 @@ export class StateService {
         this.showAround(p, shiftPos, seen);
       }
       if (!p.flagged && !p.isMine() && !p.revealed) {
-        console.log(p);
         p.revealed = true;
         this.incRevealed();
       }

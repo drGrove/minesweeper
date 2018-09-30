@@ -34,7 +34,8 @@
     }
     .open {
       border-style: inset;
-      border: grey 1px solid;
+      border: darken(grey, 10%) 1px solid;
+      background-color: lighten(grey, 10%);
     }
   }
 
