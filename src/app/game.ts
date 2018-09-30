@@ -8,7 +8,6 @@ export class Game {
   public size: Size;
   public mines: number;
   public win: boolean;
-  public thinking: boolean;
   private isEnded = false;
   private isStarted = false;
 

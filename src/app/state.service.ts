@@ -9,7 +9,7 @@ import { Piece } from './piece';
 })
 export class StateService {
   public game: Game;
-  public thinkng = false;
+  public thinking = false;
   private board: Board;
   private mines: number;
   private flags: number;
