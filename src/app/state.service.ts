@@ -10,6 +10,7 @@ import { Piece } from './piece';
 export class StateService {
   public game: Game;
   public thinking = false;
+  public lastListenedPiece: Piece | null;
   private board: Board;
   private mines: number;
   private flags: number;
@@ -23,6 +24,7 @@ export class StateService {
     this.game = game;
     this.board = game.board;
     this.mines = this.game.mines;
+    this.game.ended = false;
     this.revealedPieces = 0;
     this.flags = 0;
     this.nonMinePieces = (this.game.size.rows * this.game.size.cols) - this.mines;
@@ -77,11 +79,11 @@ export class StateService {
       if (p.isBlank) {
         this.showAround(p, shiftPos, seen);
       }
-      p.revealed = true;
-      this.incRevealed();
+      if (!p.flagged) {
+        p.revealed = true;
+        this.incRevealed();
+      }
       board[shiftPos[0]][shiftPos[1]] = p;
-
     }
-
   }
 }

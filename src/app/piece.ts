@@ -5,6 +5,7 @@ export class Piece {
   private isMarked: boolean;
   private isFlagged = false;
   public hitMine = false;
+  public thinking = false;
 
   constructor(allowMarks: boolean) {
     this.allowMarks = allowMarks;

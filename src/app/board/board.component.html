@@ -6,7 +6,7 @@
       <td
         *ngFor="let piece of row; index as colNum"
         [class.blank]="!piece.revealed"
-        [class.open]="piece.revealed"
+        [class.open]="piece.revealed || piece.thinking"
         [class.num--1]="piece.revealed && piece.getValue() == 1"
         [class.num--2]="piece.revealed && piece.getValue() == 2"
         [class.num--3]="piece.revealed && piece.getValue() == 3"

@@ -22,12 +22,14 @@ export class PieceComponent implements OnInit {
   @HostListener('mousedown')
   onMouseDown() {
     this._state.thinking = true;
+    this.piece.thinking = true;
+    this._state.lastListenedPiece = this.piece;
   }
-
 
   @HostListener('mouseup', ['$event'])
   onMouseUp(event) {
     this._state.thinking = false;
+    this.piece.thinking = false;
     switch (event.which) {
       case 1: // Left Click
         this.showValue();
@@ -67,10 +69,13 @@ export class PieceComponent implements OnInit {
         if (!this.piece.revealed) { return false; }
         return this.piece.getValue() > 0;
       case 'mine':
+        if (this._state.isEnded() && this.piece.isMine()) { return true; }
         return this.piece.getValue() === -1 && !this.piece.marked && !this.piece.flagged;
+      case 'wrongFlag':
+        return this._state.isEnded() && !this.piece.isMine() && this.piece.flagged && !this.piece.revealed;
       case 'flag':
         return this.piece.flagged && !this.piece.revealed;
-      case 'mark':
+            case 'mark':
         return this.piece.marked && !this.piece.revealed;
       default:
         return false;
